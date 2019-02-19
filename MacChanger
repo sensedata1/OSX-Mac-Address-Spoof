@@ -8,25 +8,15 @@ RAND_MAC=`openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'`   #generate random
 
 echo "New Random MAC Address = $RAND_MAC"
 
-#while  [ $RAND_MAC !=`ifconfig en1 | grep -Eo ..\(\:..\){5}` ]; ## this is just the start of figuring out how to make
-                                                                ## it keep trying until successful 
-
-
-
 sudo ifconfig en1 ether $RAND_MAC
-echo "old address = $RAND_MAC" 
+echo "old address = $RAND_MAC"
+
 ifconfig en1 | grep ether #print out our new mac address
 sleep 1
-#done
-
-
-
 sudo ifconfig en1 down    #interface down
 
-sleep 2 		  #give it a minute 
+sleep 2 		              #give it a minute 
 
-sudo ifconfig en1 up	  #interface up
+sudo ifconfig en1 up	    #interface up
 
 echo  "All done!"
-
-sleep 3
